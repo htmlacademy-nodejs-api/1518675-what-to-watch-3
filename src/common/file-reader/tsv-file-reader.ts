@@ -1,44 +1,34 @@
-import {readFileSync} from 'fs';
-import {Film} from '../../types/film.type';
 import {FileReaderInterface} from './file-reader.interface';
+import EventEmitter from 'events';
+import {createReadStream} from 'fs';
 
-export default class TSVFileReader implements FileReaderInterface {
-  private rawData = '';
-
+export default class TSVFileReader extends EventEmitter implements FileReaderInterface {
   constructor(public filename: string) {
+    super();
   }
 
-  public read(): void {
-    this.rawData = readFileSync(this.filename, {encoding: 'utf8'});
-  }
+  public async read(): Promise<void> {
+    const stream = createReadStream(this.filename, {
+      highWaterMark: 16384, // 16KB
+      encoding: 'utf-8',
+    });
 
-  public toArray(): Film[] {
-    if (!this.rawData) {
-      return [];
+    let lineRead = '';
+    let endLinePosition = -1;
+    let importedRowCount = 0;
+
+    for await (const chunk of stream) {
+      lineRead += chunk.toString();
+
+      while ((endLinePosition = lineRead.indexOf('\n')) >= 0) {
+        const completeRow = lineRead.slice(0, endLinePosition + 1);
+        lineRead = lineRead.slice(++endLinePosition);
+        importedRowCount++;
+
+        this.emit('line', completeRow);
+      }
     }
 
-    return this.rawData
-      .split('\n')
-      .filter((row) => row.trim() !== '')
-      .map((line) => line.split('\t'))
-      .map(([title, description, postDate, genre, releaseDate, rating, previewUrl, videoUrl, actors, director, duration, commentsAmount, userUrl, poster, backgroundImage, backgroundColor]) => ({
-        title,
-        description,
-        postDate: new Date(postDate),
-        genre,
-        releaseDate: new Date(releaseDate),
-        rating: Number.parseInt(rating, 10),
-        previewUrl,
-        videoUrl,
-        actors: actors.split(',')
-          .map((name) => ({name})),
-        director,
-        duration,
-        commentsAmount: Number.parseInt(commentsAmount, 10),
-        userUrl,
-        poster,
-        backgroundImage,
-        backgroundColor
-      }));
+    this.emit('end', importedRowCount);
   }
 }
