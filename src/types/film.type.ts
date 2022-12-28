@@ -1,7 +1,3 @@
-type Actors = {
-  name: string;
-}
-
 export type Film = {
   title: string;
   description: string;
@@ -11,7 +7,7 @@ export type Film = {
   rating: number;
   previewUrl: string;
   videoUrl: string;
-  actors: Actors[];
+  actors: string;
   director: string;
   duration: string;
   commentsAmount: number;

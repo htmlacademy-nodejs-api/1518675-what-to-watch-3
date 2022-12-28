@@ -1,0 +1,85 @@
+{
+  "api": {
+    "title": [
+      "The Shawshank Redemption",
+      "Schindler's List",
+      "Shichinin no samurai",
+      "The Green Mile",
+      "The Lion King",
+      "The Usual Suspects",
+      "Alien",
+      "Memento",
+      "Django Unchained",
+      "The Great Dictator",
+      "Oldeuboi",
+      "Amadeus"
+    ],
+    "description": [
+      "The life, success and troubles of Wolfgang Amadeus Mozart, as told by Antonio Salieri, the contemporaneous composer who was deeply jealous of Mozart's talent and claimed to have murdered him.",
+      "In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group of Jewish U.S. soldiers coincides with a theatre owner's vengeful plans for the same.",
+      "A cowboy doll is profoundly threatened and jealous when a new spaceman action figure supplants him as top toy in a boy's bedroom.",
+      "A German U-boat stalks the frigid waters of the North Atlantic as its young crew experience the sheer terror and claustrophobic life of a submariner in World War II.",
+      "Two strangers find themselves linked in a bizarre way. When a connection forms, will distance be the only thing to keep them apart?",
+      "The drug-induced utopias of four Coney Island people are shattered when their addictions run deep.",
+      "After a daring mission to rescue Han Solo from Jabba the Hutt, the Rebels dispatch to Endor to destroy the second Death Star. Meanwhile, Luke struggles to help Darth Vader back from the dark side without falling into the Emperor's trap.",
+      "When their relationship turns sour, a couple undergoes a medical procedure to have each other erased from their memories for ever."
+    ],
+    "genre": [
+      "comedy",
+      "drama",
+      "thriller",
+      "detective",
+      "sci-fi",
+      "fantasy"
+    ],
+    "previewUrl": [
+      "https://s1.afisha.ru/mediastorage/e4/c1/aeb9f19a3eca4b229efc0681c1e4.jpg",
+      "https://s1.afisha.ru/mediastorage/e4/c1/aeb9f19a3eca4b229efc0681c1e4.jpg",
+      "https://s1.afisha.ru/mediastorage/e4/c1/aeb9f19a3eca4b229efc0681c1e4.jpg",
+      "https://s1.afisha.ru/mediastorage/e4/c1/aeb9f19a3eca4b229efc0681c1e4.jpg"
+    ],
+    "videoUrl": [
+      "https://www.imdb.com/video/vi906147865/?playlistId=tt0382932&ref_=tt_ov_vi",
+      "https://www.imdb.com/video/vi906147865/?playlistId=tt0382932&ref_=tt_ov_vi",
+      "https://www.imdb.com/video/vi906147865/?playlistId=tt0382932&ref_=tt_ov_vi",
+      "https://www.imdb.com/video/vi906147865/?playlistId=tt0382932&ref_=tt_ov_vi",
+      "https://www.imdb.com/video/vi906147865/?playlistId=tt0382932&ref_=tt_ov_vi"
+    ],
+    "actors": [
+      "Brad Garrett",
+      "Patton Oswalt",
+      "Brian Dennehy",
+      "Arnold Schwarzenegger",
+      "Linda Hamilton",
+      "Michael Biehn",
+      "Paul Winfield"
+    ],
+    "director": [
+      "James Cameron",
+      "Francis Ford Coppola",
+      "Christopher Nolan",
+      "David Fincher"
+    ],
+    "userUrl": [
+      "userUrl",
+      "userUrl",
+      "userUrl"
+    ],
+    "poster": [
+      "https://s1.afisha.ru/mediastorage/e4/c1/aeb9f19a3eca4b229efc0681c1e4.jpg",
+      "https://s1.afisha.ru/mediastorage/e4/c1/aeb9f19a3eca4b229efc0681c1e4.jpg",
+      "https://s1.afisha.ru/mediastorage/e4/c1/aeb9f19a3eca4b229efc0681c1e4.jpg"
+    ],
+    "backgroundImage": [
+      "https://s1.afisha.ru/mediastorage/e4/c1/aeb9f19a3eca4b229efc0681c1e4.jpg",
+      "https://s1.afisha.ru/mediastorage/e4/c1/aeb9f19a3eca4b229efc0681c1e4.jpg",
+      "https://s1.afisha.ru/mediastorage/e4/c1/aeb9f19a3eca4b229efc0681c1e4.jpg"
+    ],
+    "backgroundColor": [
+      "#414122",
+      "#414122",
+      "#ffffff",
+      "#000000"
+    ]
+  }
+}
