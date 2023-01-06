@@ -1,7 +1,7 @@
 import TSVFileReader from '../common/file-reader/tsv-file-reader.js';
 import {CliCommandInterface} from './cli-command.interface.js';
 import chalk from 'chalk';
-import {createFilm, getErrorMessage} from '../utils/common.js';
+import {getErrorMessage} from '../utils/common.js';
 
 export default class ImportCommand implements CliCommandInterface {
   public readonly name = '--import';
@@ -9,8 +9,8 @@ export default class ImportCommand implements CliCommandInterface {
   public readonly errorColor = chalk.hex('#560319');
 
   private onLine(line: string) {
-    const film = createFilm(line);
-    console.log(this.filmDataColor(film));
+    // const film = createFilm(line);
+    console.log(line);
   }
 
   private onComplete(count: number) {
