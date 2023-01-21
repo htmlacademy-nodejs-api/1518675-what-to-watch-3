@@ -5,7 +5,6 @@ import {ConfigInterface} from '../common/config/config.interface.js';
 import {Component} from '../types/component.types.js';
 import {DatabaseInterface} from '../common/database-client/database.interface.js';
 import {getURI} from '../utils/db.js';
-import {UserModel} from '../modules/user/user.model.js';
 
 @injectable()
 export default class Application {
@@ -27,17 +26,14 @@ export default class Application {
       this.config.get('DB_NAME'),
     );
 
-    this.logger.info(`URI: ${uri}`);
-    const user = await UserModel.create({
-      name: 'test@email.local',
-      email: 'keks.jpg',
-      avatar: 'Keks',
-      password: 'Unknown'
-    });
-
-
-    console.log(user);
-
     await this.databaseClient.connect(uri);
+
+    // const user = await UserModel.create({
+    //   name: 'Kekssss',
+    //   email: 'teddstpppp@mail.ru',
+    //   avatar: 'kekd2s.jpg',
+    //   password: 'Unknown'
+    // });
+    // console.log(user);
   }
 }
