@@ -20,16 +20,16 @@ export class FilmEntity extends defaultClasses.TimeStamps implements Film {
   public genre!: string;
 
   @prop({required: true, trim: true})
-  public releaseDate!: Date;
+  public releaseDate!: string;
 
   @prop({required: true, trim: true})
   public description!: string;
 
   @prop({required: true, trim: true})
-  public postDate!: Date;
+  public postDate!: string;
 
-  @prop({required: true, trim: true})
-  public rating!: number;
+  @prop({trim: true})
+  public rating!: string;
 
   @prop({required: true, trim: true})
   public previewUrl!: string;
@@ -47,18 +47,18 @@ export class FilmEntity extends defaultClasses.TimeStamps implements Film {
   public duration!: string;
 
   @prop({required: true, trim: true})
-  public commentsAmount!: number;
+  public commentsAmount!: string;
 
   @prop({required: true, trim: true})
   public userUrl!: User;
 
-  @prop({required: true, trim: true})
+  @prop({trim: true})
   public poster!: string;
 
-  @prop({required: true, trim: true})
+  @prop({trim: true})
   public backgroundImage!: string;
 
-  @prop({required: true, trim: true})
+  @prop({trim: true})
   public backgroundColor!: string;
 }
 

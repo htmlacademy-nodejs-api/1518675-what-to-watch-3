@@ -42,4 +42,8 @@ export default class UserService implements UserServiceInterface {
 
     return this.create(dto, salt);
   }
+
+  public async authorize(token: string): Promise<DocumentType<UserEntity> | null> {
+    return this.userModel.findOne({token});
+  }
 }
