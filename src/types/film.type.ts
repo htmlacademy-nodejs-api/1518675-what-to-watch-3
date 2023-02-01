@@ -1,17 +1,19 @@
+import {User} from './user.type';
+
 export type Film = {
   title: string;
   description: string;
-  postDate: Date;
+  postDate: string;
   genre: string;
-  releaseDate: Date;
-  rating: number;
+  releaseDate: string;
+  rating: string;
   previewUrl: string;
   videoUrl: string;
   actors: string;
   director: string;
   duration: string;
-  commentsAmount: number;
-  userUrl: string;
+  commentsAmount: string;
+  userUrl: User;
   poster: string;
   backgroundImage: string;
   backgroundColor: string;

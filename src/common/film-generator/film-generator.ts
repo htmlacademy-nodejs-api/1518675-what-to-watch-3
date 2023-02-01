@@ -21,7 +21,7 @@ export default class FilmGenerator implements FilmGeneratorInterface {
     const postDate = dayjs().subtract(generateRandomValue(FIRST_WEEK_DAY, LAST_WEEK_DAY), 'day').toISOString();
     const genre = getRandomItems<string>(this.mockData.genre).join(';');
     const releaseDate = dayjs().subtract(generateRandomValue(FIRST_WEEK_DAY, LAST_WEEK_DAY), 'day').toISOString();
-    const rating = generateRandomValue(FIRST_WEEK_DAY, LAST_WEEK_DAY);
+    const rating = generateRandomValue(FIRST_WEEK_DAY, LAST_WEEK_DAY).toString();
     const previewUrl = getRandomItem<string>(this.mockData.previewUrl);
     const videoUrl = getRandomItem<string>(this.mockData.videoUrl);
     const actors = getRandomItems<string>(this.mockData.actors).join(';');
