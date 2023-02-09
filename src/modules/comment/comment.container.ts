@@ -7,7 +7,7 @@ import {Component} from '../../types/component.types.js';
 
 const commentContainer = new Container();
 
-commentContainer.bind<CommentServiceInterface>(Component.CommentServiceInterface).to(CommentService);
+commentContainer.bind<CommentServiceInterface>(Component.CommentServiceInterface).to(CommentService).inSingletonScope();
 commentContainer.bind<types.ModelType<CommentEntity>>(Component.CommentModel).toConstantValue(CommentModel);
 
 export {commentContainer};
