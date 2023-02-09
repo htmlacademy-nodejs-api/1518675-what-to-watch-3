@@ -56,6 +56,168 @@ paths:
       description: Загружает изображение аватара пользователя. Изображение
         аватара должно быть в формате `png` или `jpg`.
 
+  /films/add:
+    post:
+      tags:
+        - films
+      summary: Добавление нового фильма
+      description: Добавляет новый фильм на основе переданной информации от пользователя.
+
+      requestBody:
+        description: Информация для создания нового фильма.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/film'
+        required: true
+
+        responses:
+          "201":
+            description: Фильм создан. Объект пользователя.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/film'
+
+  /films/{filmId}/update:
+    post:
+      tags:
+        - films
+      summary: Обновление данных фильма
+      description: Обновляет фильм на основаннии данных, полученных от пользователя.
+
+      requestBody:
+        description: Информация для обновления уже существующего фильма.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/film'
+        required: true
+
+        responses:
+          "201":
+            description: Фильм обновлён. Объект пользователя.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/film'
+
+  /films/{filmId}/delete:
+    post:
+      tags:
+        - films
+      summary: Удаление фильма
+      description: Удаляет фильм пользователя.
+
+      requestBody:
+        description: Уникальный id для удаления фильма.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/deleteFilm'
+        required: true
+
+        responses:
+          "201":
+            description: Фильм удалён.
+          "401":
+            description: Удалить фильм может только авторизованный пользователь.
+          "404":
+            description: Пользователь может удалять только свои фильмы.
+
+  /films/get-all-films:
+    get:
+      tags:
+        - films
+      summary: Получение списка фильмов
+      description: Получает список всех фильмов
+
+      requestBody:
+        description: Уникальный id для фильма.
+        $ref: '#/components/schemas/getFilms'
+
+      responses:
+        "201":
+          description: Список фильмов получен.
+
+  /films/get-films-by-genre/{genreFilmId}:
+    get:
+      tags:
+        - films
+      summary: Получение списка фильмов определённого жанра
+      description: Получает список всех фильмов определённого жанра
+
+      requestBody:
+        description: Уникальный id жанра.
+        $ref: '#/components/schemas/getFilms'
+
+      responses:
+        "201":
+          description: Список фильмов получен.
+
+  /films/get-film/{filmId}:
+    get:
+      tags:
+        - films
+      summary: Получение детальной информации по фильму
+      description: Получает детальную информацию по фильму
+
+      requestBody:
+        description: Уникальный id фильма.
+        $ref: '#/components/schemas/getFilm'
+
+      responses:
+        "201":
+          description: Список фильмов получен.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFilm'
+        "404":
+          description: Такого фильма не существует.
+
+  /films/get-film-details/{filmId}:
+    get:
+      tags:
+        - films
+      summary: Получение детальной информации по фильму
+      description: Получает детальную информацию по фильму
+
+      requestBody:
+        description: Уникальный id фильма.
+        $ref: '#/components/schemas/getFilm'
+
+      responses:
+        "201":
+          description: Информация по фильму получена.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFilm'
+        "404":
+          description: Такого фильма не существует.
+
+  /films/get-comments/{filmId}:
+    get:
+      tags:
+        - comments
+      summary: Получение списка комментариев к фильму
+      description: Получает список комментариев к фильму
+
+      requestBody:
+        description: Уникальный id фильма.
+        $ref: '#/components/schemas/getComments'
+
+      responses:
+        "201":
+          description: Комментарии по фильму получены.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getComments'
+        "404":
+          description: Фильма с таким id не существует.
+
 components:
   schemas:
     createUser:
@@ -88,4 +250,110 @@ components:
 
         email:
           type: string
-          example: keks@htmlacademy.ru
+          example: pepega@htmlacademy.ru
+
+        name:
+          type: string
+          example: testUserName
+
+        avatar:
+          type: string
+          example: avatarUrl
+
+        password:
+          type: string
+          example: 123456
+
+    film:
+      type: object
+
+      properties:
+        title:
+          type: string
+          example: Gladiator
+
+        description:
+          type: string
+          example: The description of the film
+
+        postDate:
+          type: string
+          example: 02.20.21
+
+        genre:
+          type: string
+          example: Horror
+
+        releaseDate:
+          type: string
+          example: 02.20.21
+
+        previewUrl:
+          type: string
+          example: https://preview.url
+
+        videoUrl:
+          type: string
+          example: https://video.url
+
+        actors:
+          type: string
+          example: Benedict Cucumber
+
+        director:
+          type: string
+          example: Steven Spielberg
+
+        duration:
+          type: string
+          example: 1h 20m
+
+        commentsAmount:
+          type: string
+          example: 25
+
+        userUrl:
+          type: string
+          example: link
+
+        poster:
+          type: string
+          example: https://preview.url
+
+        backgroundImage:
+          type: string
+          example: https://preview.url
+
+        backgroundColor:
+          type: string
+          example: red
+
+    deleteFilm:
+      type: object
+
+      properties:
+        id:
+          type: string
+          example: 6329c3d6a04ab1061c6425ea
+
+    getFilms:
+      type: array
+
+      properties:
+        type: array
+        example: [ { }, { }, { } ]
+
+    getFilm:
+      type: object
+
+      properties:
+        id:
+          type: string
+          example: 6329c3d6a04ab1061c6425ea
+
+    getComments:
+      type: array
+
+      properties:
+        type: array
+        example: [ { }, { }, { } ]

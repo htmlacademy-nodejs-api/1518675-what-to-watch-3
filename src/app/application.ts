@@ -7,6 +7,7 @@ import {DatabaseInterface} from '../common/database-client/database.interface.js
 import {getURI} from '../utils/db.js';
 import express, {Express} from 'express';
 import {ControllerInterface} from '../common/controller/controller.interface.js';
+// import {FilmModel} from '../modules/film/film.entity.js';
 
 @injectable()
 export default class Application {
@@ -22,7 +23,8 @@ export default class Application {
   }
 
   public initRoutes() {
-    this.expressApp.use('/categories', this.filmController.router);
+    this.expressApp.use('/users', this.filmController.router);
+    this.expressApp.use('/films', this.filmController.router);
   }
 
   public async init() {
@@ -43,8 +45,23 @@ export default class Application {
     this.expressApp.listen(this.config.get('PORT'));
     this.logger.info(`Server started on http://localhost:${this.config.get('PORT')}`);
 
+    // const data = this.filmController.getTotalCommentsById('34545354');
+    // console.log('data:', data);
+
     this.expressApp.get('/', (_req, res) => {
-      res.send('Hello...');
+      const json = {
+        '1': 'one',
+        '2': 'two'
+      };
+      res.send(json);
+
     });
+
+    // const pepega = await FilmModel.create({
+    //   email: 'test@email.local',
+    //   avatarPath: 'keks.jpg',
+    //   firstname: 'Keks',
+    //   lastname: 'Unknown'
+    // });
   }
 }
