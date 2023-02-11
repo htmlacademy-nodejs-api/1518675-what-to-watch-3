@@ -45,7 +45,7 @@ export default class Application {
     this.expressApp.listen(this.config.get('PORT'));
     this.logger.info(`Server started on http://localhost:${this.config.get('PORT')}`);
 
-    // const data = this.filmController.getTotalCommentsById('34545354');
+    // const data = this.filmController.getTotalCommentsById('/films', '34545354');
     // console.log('data:', data);
 
     this.expressApp.get('/', (_req, res) => {

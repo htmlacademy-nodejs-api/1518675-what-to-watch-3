@@ -12,4 +12,5 @@ export interface FilmServiceInterface {
   find(): Promise<DocumentType<FilmEntity>[]>;
   deleteById(filmId: string): Promise<DocumentType<FilmEntity> | null>;
   updateById(offerId: string, dto: UpdateFilmDto): Promise<DocumentType<FilmEntity> | null>;
+  getTotalCommentsById(filmId: string): Promise<DocumentType<FilmEntity> | null>;
 }

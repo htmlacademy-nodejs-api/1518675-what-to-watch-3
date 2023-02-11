@@ -77,26 +77,26 @@ export default class FilmService implements FilmServiceInterface {
       .exec();
   }
 
-  // public async getTotalCommentsById(filmId: string): Promise<DocumentType<FilmEntity> | null> {
-  //
-  //   return this.filmModel
-  //     .findById(filmId)
-  //     .aggregate([
-  //       {
-  //         $lookup: {
-  //           from: 'comments',
-  //           pipeline: [
-  //             {$match: filmId},
-  //             {$project: {rating: 1}}
-  //           ],
-  //           as: 'comments-by-film'
-  //         },
-  //       },
-  //       {
-  //         $addFields:
-  //           {id: {$toString: '$filmId'}}
-  //       }
-  //     ])
-  //     .exec();
-  // }
+  public async getTotalCommentsById(filmId: string): Promise<DocumentType<FilmEntity> | null> {
+
+    return this.filmModel
+      .findById(filmId)
+      .aggregate([
+        {
+          $lookup: {
+            from: 'comments',
+            pipeline: [
+              {$match: filmId},
+              {$project: {rating: 1}}
+            ],
+            as: 'comments-by-film'
+          },
+        },
+        {
+          $addFields:
+            {id: {$toString: '$filmId'}}
+        }
+      ])
+      .exec();
+  }
 }
