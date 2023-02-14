@@ -1,4 +1,20 @@
 # Тестовые данные
 GET http://localhost:5001/ HTTP/1.1
 
-###
+### Получение списка всех фильмов
+GET http://localhost:5001/films HTTP/1.1
+
+### Получение детальной информации о фильме по id
+GET http://localhost:5001/films/filmId HTTP/1.1
+
+### Получение фильма с определённым именем
+GET http://localhost:5001/films/filmName HTTP/1.1
+
+### Получение списка фильмов определённого жанра
+GET http://localhost:5001/films/genre HTTP/1.1
+
+### Получение всех комментариев
+GET http://localhost:5001/comments/ HTTP/1.1
+
+### Получение всех комментариев фильма по его id
+GET http://localhost:5001/comments/filmId HTTP/1.1

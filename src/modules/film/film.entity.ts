@@ -1,7 +1,7 @@
-import {defaultClasses} from '@typegoose/typegoose';
+import {defaultClasses, Ref} from '@typegoose/typegoose';
 import typegoose, {getModelForClass} from '@typegoose/typegoose';
 import {Film} from '../../types/film.type.js';
-import {User} from '../../types/user.type';
+import {UserEntity} from '../user/user.entity.js';
 
 const {prop, modelOptions} = typegoose;
 
@@ -49,8 +49,11 @@ export class FilmEntity extends defaultClasses.TimeStamps implements Film {
   @prop({required: true, trim: true})
   public commentsAmount!: string;
 
-  @prop({required: true, trim: true})
-  public userUrl!: User;
+  @prop({
+    ref: UserEntity,
+    required: true
+  })
+  public userUrl!: Ref<UserEntity>;
 
   @prop({trim: true})
   public poster!: string;

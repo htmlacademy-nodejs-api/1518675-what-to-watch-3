@@ -1,4 +1,5 @@
-import {User} from './user.type';
+import {Ref} from '@typegoose/typegoose';
+import {UserEntity} from '../modules/user/user.entity.js';
 
 export type Film = {
   title: string;
@@ -13,7 +14,7 @@ export type Film = {
   director: string;
   duration: string;
   commentsAmount: string;
-  userUrl: User;
+  userUrl: Ref<UserEntity>;
   poster: string;
   backgroundImage: string;
   backgroundColor: string;

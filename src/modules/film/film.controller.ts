@@ -21,6 +21,10 @@ export default class FilmController extends Controller {
     this.logger.info('Register routes for FilmController...');
 
     this.addRoute({path: '/', method: HttpMethod.Get, handler: this.index});
+    this.addRoute({path: '/filmId', method: HttpMethod.Get, handler: this.findById});
+    this.addRoute({path: '/filmName', method: HttpMethod.Get, handler: this.findByFilmName});
+    this.addRoute({path: '/genre', method: HttpMethod.Get, handler: this.findByGenre});
+    // this.addRoute({path: '/filmIdDetails', method: HttpMethod.Get, handler: this.findByFilmIdDetails});
     this.addRoute({path: '/', method: HttpMethod.Post, handler: this.create});
   }
 
@@ -32,25 +36,22 @@ export default class FilmController extends Controller {
   public create(_req: Request, _res: Response): void {
     // Код обработчика
   }
-  // public async getTotalCommentsById(filmId: string): Promise<DocumentType<FilmEntity> | null> {
-  //   return this.filmModel
-  //     .findById(filmId)
-  //     .aggregate([
-  //       {
-  //         $lookup: {
-  //           from: 'comments',
-  //           pipeline: [
-  //             {$match: filmId},
-  //             {$project: {rating: 1}}
-  //           ],
-  //           as: 'comments-by-film'
-  //         },
-  //       },
-  //       {
-  //         $addFields:
-  //           {id: {$toString: '$filmId'}}
-  //       }
-  //     ])
-  //     .exec();
-  // }
+
+  public async findById(_req: Request, res: Response): Promise<void> {
+    // Пока хардкор
+    const film = await this.filmService.findByFilmId('63e77e8f3225defb4ba08a30');
+    this.send(res, StatusCodes.OK, film);
+  }
+
+  public async findByFilmName(_req: Request, res: Response): Promise<void> {
+    // Пока хардкор
+    const film = await this.filmService.findByFilmName('Django Unchained');
+    this.send(res, StatusCodes.OK, film);
+  }
+
+  public async findByGenre(_req: Request, res: Response): Promise<void> {
+    // Пока хардкор
+    const film = await this.filmService.findByGenre('comedy');
+    this.send(res, StatusCodes.OK, film);
+  }
 }
