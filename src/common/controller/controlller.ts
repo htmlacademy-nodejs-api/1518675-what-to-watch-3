@@ -41,7 +41,7 @@ export abstract class Controller implements ControllerInterface {
     this.send(res, StatusCodes.OK, data);
   }
 
-  // public getTotalCommentsById<T>(res: string): void {
-  //   this.send(res, StatusCodes.OK, data);
-  // }
+  public getTotalCommentsById<T>(res: Response, data: T): void {
+    this.send(res, StatusCodes.OK, data);
+  }
 }

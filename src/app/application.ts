@@ -7,6 +7,7 @@ import {DatabaseInterface} from '../common/database-client/database.interface.js
 import {getURI} from '../utils/db.js';
 import express, {Express} from 'express';
 import {ControllerInterface} from '../common/controller/controller.interface.js';
+// import {UserModel} from '../modules/user/user.model.js';
 // import {FilmModel} from '../modules/film/film.entity.js';
 
 @injectable()
@@ -17,14 +18,17 @@ export default class Application {
     @inject(Component.LoggerInterface) private logger: LoggerInterface,
     @inject(Component.ConfigInterface) private config: ConfigInterface,
     @inject(Component.DatabaseInterface) private databaseClient: DatabaseInterface,
-    @inject(Component.FilmController) private filmController: ControllerInterface
+    @inject(Component.FilmController) private filmController: ControllerInterface,
+    @inject(Component.CommentController) private commentController: ControllerInterface,
+    // @inject(Component.UserController) private userController: ControllerInterface,
   ) {
     this.expressApp = express();
   }
 
   public initRoutes() {
-    this.expressApp.use('/users', this.filmController.router);
+    // this.expressApp.use('/users', this.userController.router);
     this.expressApp.use('/films', this.filmController.router);
+    this.expressApp.use('/comments', this.commentController.router);
   }
 
   public async init() {
@@ -45,7 +49,7 @@ export default class Application {
     this.expressApp.listen(this.config.get('PORT'));
     this.logger.info(`Server started on http://localhost:${this.config.get('PORT')}`);
 
-    // const data = this.filmController.getTotalCommentsById('34545354');
+    // const data = this.filmController.getTotalCommentsById('/films', '34545354');
     // console.log('data:', data);
 
     this.expressApp.get('/', (_req, res) => {
@@ -57,11 +61,13 @@ export default class Application {
 
     });
 
-    // const pepega = await FilmModel.create({
+    // const pepega = await UserModel.create({
     //   email: 'test@email.local',
     //   avatarPath: 'keks.jpg',
     //   firstname: 'Keks',
     //   lastname: 'Unknown'
     // });
+
+    // console.log(pepega);
   }
 }
