@@ -6,7 +6,7 @@ import {LoggerInterface} from '../../common/logger/logger.interface.js';
 import {FilmEntity} from './film.entity.js';
 import CreateFilmDto from './dto/create-film.dto.js';
 import UpdateFilmDto from './dto/update-film.dto.js';
-import {DEFAULT_FILM_COUNT} from './film.constant.js';
+// import {DEFAULT_FILM_COUNT} from './film.constant.js';
 
 @injectable()
 export default class FilmService implements FilmServiceInterface {
@@ -22,19 +22,12 @@ export default class FilmService implements FilmServiceInterface {
     return result;
   }
 
-  public async findByFilmId(filmId: string): Promise<DocumentType<FilmEntity> | null> {
+  public async findById(filmId: string): Promise<DocumentType<FilmEntity> | null> {
     return this.filmModel
       .findById(filmId)
       .populate(['userUrl'])
       .exec();
   }
-
-  // public async findByFilmIdDetails(filmId: string): Promise<DocumentType<FilmEntity> | null> {
-  //   return this.filmModel
-  //     .findById(filmId)
-  //     .populate(['userId'])
-  //     .exec();
-  // }
 
   public async findByFilmName(filmName: string): Promise<DocumentType<FilmEntity> | null> {
     return this.filmModel.findOne({title: filmName}).exec();
@@ -67,19 +60,10 @@ export default class FilmService implements FilmServiceInterface {
       .exec();
   }
 
-  public async find(count = DEFAULT_FILM_COUNT): Promise<DocumentType<FilmEntity>[]> {
-    const limit = count ?? DEFAULT_FILM_COUNT;
+  public async find(): Promise<DocumentType<FilmEntity>[]> {
+    // const limit = count ?? DEFAULT_FILM_COUNT;
     return this.filmModel
-      .find({}, {
-        id: 1,
-        title: 1,
-        postDate: 1,
-        genre: 1,
-        previewUrl: 1,
-        userUrl: 1,
-        poster: 1,
-        commentsAmount: 1
-      }, {limit})
+      .find()
       .populate('userUrl')
       .exec();
   }
@@ -87,7 +71,7 @@ export default class FilmService implements FilmServiceInterface {
   public async updateById(filmId: string, dto: UpdateFilmDto): Promise<DocumentType<FilmEntity> | null> {
     return this.filmModel
       .findByIdAndUpdate(filmId, dto, {new: true})
-      .populate(['userId'])
+      .populate(['userUrl'])
       .exec();
   }
 
