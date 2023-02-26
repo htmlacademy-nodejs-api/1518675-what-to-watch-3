@@ -8,6 +8,7 @@ import {LoggerInterface} from '../../common/logger/logger.interface.js';
 import {Component} from '../../types/component.types.js';
 import {types} from '@typegoose/typegoose';
 import UpdateUserDto from './dto/update-user.dto.js';
+import LoginUserDto from './dto/login-user.dto.js';
 
 @injectable()
 export default class UserService implements UserServiceInterface {
@@ -52,5 +53,19 @@ export default class UserService implements UserServiceInterface {
 
   public async authorize(token: string): Promise<DocumentType<UserEntity> | null> {
     return this.userModel.findOne({token});
+  }
+
+  public async verifyUser(dto: LoginUserDto, salt: string): Promise<DocumentType<UserEntity> | null> {
+    const user = await this.findByEmail(dto.email);
+
+    if (!user) {
+      return null;
+    }
+
+    if (user.verifyPassword(dto.password, salt)) {
+      return user;
+    }
+
+    return null;
   }
 }

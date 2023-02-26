@@ -2,6 +2,7 @@ import {Film} from '../types/film.type';
 import * as crypto from 'crypto';
 import {plainToInstance} from 'class-transformer';
 import {ClassConstructor} from 'class-transformer/types/interfaces/class-constructor.type.js';
+import * as jose from 'jose';
 
 export const createFilm = (row: string) => {
   const tokens = row.replace('\n', '').split('\t');
@@ -59,3 +60,10 @@ export const getErrorMessage = (error: unknown): string => error instanceof Erro
 export const createErrorObject = (message: string) => ({
   error: message,
 });
+
+export const createJWT = async (algorithm: string, jwtSecret: string, payload: object): Promise<string> =>
+  new jose.SignJWT({...payload})
+    .setProtectedHeader({ alg: algorithm})
+    .setIssuedAt()
+    .setExpirationTime('2d')
+    .sign(crypto.createSecretKey(jwtSecret, 'utf-8'));

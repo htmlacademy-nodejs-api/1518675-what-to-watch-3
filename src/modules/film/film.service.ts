@@ -6,7 +6,7 @@ import {LoggerInterface} from '../../common/logger/logger.interface.js';
 import {FilmEntity} from './film.entity.js';
 import CreateFilmDto from './dto/create-film.dto.js';
 import UpdateFilmDto from './dto/update-film.dto.js';
-// import {DEFAULT_FILM_COUNT} from './film.constant.js';
+import {DEFAULT_FILM_COUNT} from './film.constant.js';
 
 @injectable()
 export default class FilmService implements FilmServiceInterface {
@@ -33,14 +33,15 @@ export default class FilmService implements FilmServiceInterface {
     return this.filmModel.findOne({title: filmName}).exec();
   }
 
-  public async findByGenre(genre: string, count?: number): Promise<DocumentType<FilmEntity>[]> {
-    console.log(count);
-    // const limit = count ?? DEFAULT_FILM_COUNT;
+  public async findFilmsByGenre(genre: string, count?: number): Promise<DocumentType<FilmEntity>[]> {
+    const limit = count ?? DEFAULT_FILM_COUNT;
+    console.log(limit);
     return this.filmModel
-      // .find({genre: genre}, {}, {limit})
       .aggregate([
         {$project: {genre: {$split: ['$genre', ', ']}, qty: 1}},
-        {$match: {genre}}])
+        {$match: {genre}}
+      ])
+      .limit(Number(limit))
       .exec();
   }
 
@@ -61,7 +62,6 @@ export default class FilmService implements FilmServiceInterface {
   }
 
   public async find(): Promise<DocumentType<FilmEntity>[]> {
-    // const limit = count ?? DEFAULT_FILM_COUNT;
     return this.filmModel
       .find()
       .populate('userUrl')
@@ -105,5 +105,10 @@ export default class FilmService implements FilmServiceInterface {
         }
       ])
       .exec();
+  }
+
+  public async exists(documentId: string): Promise<boolean> {
+    return (await this.filmModel
+      .exists({_id: documentId})) !== null;
   }
 }
