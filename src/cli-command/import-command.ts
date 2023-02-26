@@ -42,11 +42,6 @@ export default class ImportCommand implements CliCommandInterface {
       password: DEFAULT_USER_PASSWORD
     }, this.salt);
 
-    // for (const {name} of offer.categories) {
-    //   const existCategory = await this.categoryService.findByCategoryNameOrCreate(name, {name});
-    //   categories.push(existCategory.id);
-    // }
-
     await this.filmService.create({
       ...film,
       userId: user.id,

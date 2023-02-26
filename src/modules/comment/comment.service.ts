@@ -19,12 +19,6 @@ export default class CommentService implements CommentServiceInterface {
     return comment.populate('authorId');
   }
 
-  // public async findCommentsByFilmId(filmId: string): Promise<DocumentType<CommentEntity>[]> {
-  //   return this.commentModel
-  //     .find({filmId: filmId}, {}, {})
-  //     .exec();
-  // }
-
   public async find(): Promise<DocumentType<CommentEntity>[]> {
     return this.commentModel
       .find()
@@ -33,28 +27,9 @@ export default class CommentService implements CommentServiceInterface {
   }
 
   public async findCommentsByFilmId(filmId: string): Promise<DocumentType<CommentEntity>[]> {
-    // return this.commentModel.findById(filmId).exec();
-
     return this.commentModel
-      .find({$filmId: {$search: filmId}})
+      .find({filmId})
       .exec();
-
-    // return this.commentModel
-    //   .aggregate([
-    //     {
-    //       $lookup: {
-    //         from: 'comments',
-    //         pipeline: [
-    //           { $match: { filmId: filmId } },
-    //           { $project: { _id: 1}}
-    //         ],
-    //         as: 'comments'
-    //       },
-    //     },
-    //     { $addFields:
-    //         { id: { $toString: '$_id'}, commentCount: { $size: '$comments'} }
-    //     },
-    //   ]).exec();
   }
 
   public async deleteByCommentId(commentId: string): Promise<number> {
